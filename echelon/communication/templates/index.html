@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block nav_home %}class="active"{% endblock %}
+{% block content %}
+  <div class="hero-unit">
+    <h1>Bienvenue sur Echelon</h1>
+    <p>Cette plateforme vous permet de gérer vos moyen d'être notifier en choisissant pour chaque application du réseau LT :
+      <ul>
+        <li>Par quel biais être notifié Email, Jabber, HipChat...;</li>
+        <li>A quelle fréquence être notifié;</li>
+        <li>Et sur quel compte ou quelle adresse (email par exemple);</li>
+      </ul></p>
+  </div>
+
+    <div class="row">
+      <div class="span12">
+        <h2>Vos préférences :</h2>
+        <table class="table table-hover">
+          <caption>Services notifications by frequency</caption>
+          <thead>
+            <tr>
+              <th>Service</th>
+              <th>Notification type</th>
+              <th>Notification priority</th>
+              <th>Medium</th>
+              <th>Frequency</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for pref in user.preferences.all %}
+            <tr>
+              <td>{{ pref.service }}</td>
+              <td>{{ pref.notification_type }}</td>
+              <td>{{ pref.priority }}</td>
+              <td><a href="#" rel="tooltip" title="{{ pref.medium.tooltip }}" data-placement="bottom">{{ pref.medium.summary }}</a></td>
+              <td><a href="#" rel="tooltip" title="{{ pref.frequency.description }}" data-placement="bottom">{{ pref.frequency }}</a></td>
+              <td><a class="btn" href="#">Change</a></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+{% endblock %}
