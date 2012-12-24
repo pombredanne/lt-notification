@@ -10,35 +10,61 @@
         <li>Et sur quel compte ou quelle adresse (email par exemple);</li>
       </ul></p>
   </div>
-
-    <div class="row">
-      <div class="span12">
-        <h2>Vos préférences :</h2>
-        <table class="table table-hover">
-          <caption>Services notifications by frequency</caption>
-          <thead>
-            <tr>
-              <th>Service</th>
-              <th>Notification type</th>
-              <th>Notification priority</th>
-              <th>Medium</th>
-              <th>Frequency</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for pref in user.preferences.all %}
-            <tr>
-              <td>{{ pref.service }}</td>
-              <td>{{ pref.notification_type }}</td>
-              <td>{{ pref.priority }}</td>
-              <td><a href="#" rel="tooltip" title="{{ pref.medium.tooltip }}" data-placement="bottom">{{ pref.medium.summary }}</a></td>
-              <td><a href="#" rel="tooltip" title="{{ pref.frequency.description }}" data-placement="bottom">{{ pref.frequency }}</a></td>
-              <td><a class="btn" href="#">Change</a></td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
+  
+  <div class="row">
+    <div class="span12">
+      <h2>Vos préférences :</h2>
+      <table class="table table-hover">
+        <caption>Services notifications by frequency</caption>
+        <thead>
+          <tr>
+            <th>Service</th>
+            <th>Notification type</th>
+            <th>Notification priority</th>
+            <th>Medium</th>
+            <th>Frequency</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for pref in user.preferences.all %}
+          <tr>
+            <td>{{ pref.service }}</td>
+            <td>{{ pref.notification_type }}</td>
+            <td>{{ pref.priority }}</td>
+            <td><a href="#" rel="tooltip" title="{{ pref.medium.tooltip }}" data-placement="bottom">{{ pref.medium.summary }}</a></td>
+            <td><a href="#" rel="tooltip" title="{{ pref.frequency.description }}" data-placement="bottom">{{ pref.frequency }}</a></td>
+            <td><a class="btn" href="{% url pref_detail pref.pk %}">Change</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
+  </div>
+
+  <div class="row">
+    <div class="span12">
+      <h2>Means to contact you :</h2>
+      <table class="table table-hover">
+        <caption>Ways to contact you</caption>
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Name</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for medium in user.mediums.all %}
+          <tr>
+            <td>{{ medium }}</td>
+            <td>{{ medium.name }}</td>
+            <td>{{ medium.description }}</td>
+            <td><a class="btn" href="">Change</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
 
 {% endblock %}

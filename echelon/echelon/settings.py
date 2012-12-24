@@ -121,6 +121,7 @@ INSTALLED_APPS = (
     'accounts',
     'communication',
     'communication.mediums.email',
+    'communication.mediums.xmpp',
 )
 
 # A sample logging configuration. The only tangible logging

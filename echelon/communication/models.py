@@ -2,6 +2,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 from django.contrib.auth.models import User
 from communication.fields import TimedeltaField
+from model_utils.managers import InheritanceManager
 from django.db import models
 
 
@@ -37,9 +38,9 @@ class CommunicationMedium(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
     is_private = models.BooleanField(default=True)
+    user = models.ForeignKey(User, related_name="mediums")
+
+    objects = InheritanceManager()
 
     def __unicode__(self):
         return self.name
-
-    class Meta:
-        abstract = True

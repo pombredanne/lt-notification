@@ -8,7 +8,10 @@ class EmailMedium(CommunicationMedium):
     subject_prefix = models.CharField(max_length=50, blank=True, default="[Prefix]")
 
     def summary(self):
-    	return "Email -> %s" % (self.to_address) 
+        return "Email -> %s" % (self.to_address) 
 
     def tooltip(self):
-    	return "Email from '%s' to '%s' prefixing subject with '%s'" % (self.from_address, self.to_address, self.subject_prefix)
+        return "Email from '%s' to '%s' prefixing subject with '%s'" % (self.from_address, self.to_address, self.subject_prefix)
+
+    class Meta:
+        verbose_name = "Email"
